@@ -306,7 +306,7 @@ When it completes, click on `View console` or if there is any problem, just go t
 - Fill in the three environment variables. The needed values can be found in the notebook from **Step 5**
 - Find `APIKEY` in the `wml_credentials` dictionary, in cell 5
 - Find `ML_INSTANCE_ID` also in the `wml_credentials` dictionary, in cell 5
-- Find `WML_URL` in cell 7, in the code: `response_scoring = requests.post(`https://eu-gb.ml.cloud.ibm.com/v4/deployments/b67c9df3-535f-4b98-ba55-71dc811e36f5/predictions`, json=payload_scoring, headers=header)`. The selected URL is the value you need.
+- Find `WML_URL` in cell 7, in the code: `response_scoring = requests.post(`https://eu-gb.ml.cloud.ibm.com/v4/deployments/b67c9df3-535f-4b98-ba55-71dc811e36f5/predictions `, json=payload_scoring, headers=header)`. The selected URL is the value you need.
 - Press `Save`
 The application will restart.<br/>
 Once restarted, click on `Visit App URL`. The application screen will open
