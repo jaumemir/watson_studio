@@ -5,7 +5,7 @@ applications:
   memory: 256M
   buildpack: sdk-for-nodejs
   env:
-    APIKEY:<introduce your api key>
-    ML_INSTANCE_ID:<introduce your instance ID>
-    WML_URL:<introduce the Scoring URL of your model>
+    APIKEY: <introduce your api key>
+    ML_INSTANCE_ID: <introduce your instance ID>
+    WML_URL: <introduce the Scoring URL of your model>
   
