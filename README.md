@@ -287,13 +287,38 @@ You should get the scoring results, with an array, where each element contains t
 
 ### Step 6. Deploy Web Application
 In this step, you will deploy a web application that will call the published AutoAI web service endpoint to get the loan granting decision.
-<br/>[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/jaumemir/watson_studio.git)
 <br/>
+<br/>[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/jaumemir/watson_studio.git)
+<br/><br/>
 Click `Deploy to IBM Cloud` button above to deploy the application to IBM Cloud. <br/>
+<br/>
+The IBM Cloud DevOps will open and a new Toolchain will be created for you.
+<br/><br/><img src="images/Toolchain.png" alt="Toolchain" width="640" border="10" /><br/><br/>
+- Just click to `Delivery Pipeline` and then to `New` key to generate a new key.
+- Ensure that region, organization and space are filled up and then press `Create`
+<br/><br/><img src="images/Toolchain2.png" alt="Toolchain2" width="640" border="10" /><br/><br/>
+The toolchain and delivery pipeline will be created and launched its execution. Click on `Delivery Pipeline` to access and monitor how the toolchain builds the application and deploys it as an IBM Cloudfoundry node.js application.
+<br/><br/><img src="images/Toolchain3.png" alt="Toolchain3" width="640" border="10" /><br/><br/>
+When it completes, click on `View console` or if there is any problem, just go to `Resource List`, find the application `watson_studio-202001nnnnnnnnn` (being `nnn` digits) and open it.
+<br/><br/><img src="images/Application.png" alt="Application" width="640" border="10" /><br/><br/>
+- Click on the `Runtime` menu
+- Click on `Environment Variables` and scroll down
+- Fill in the three environment variables. The needed values can be found in the notebook from **Step 5**
+- Find `APIKEY` in the `wml_credentials` dictionary, in cell 5
+- Find `ML_INSTANCE_ID` also in the `wml_credentials` dictionary, in cell 5
+- Find `WML_URL` in cell 7, in the code: `response_scoring = requests.post(`'**https://eu-gb.ml.cloud.ibm.com/v4/deployments/b67c9df3-535f-4b98-ba55-71dc811e36f5/predictions**`', json=payload_scoring, headers=header)`. The selected URL is the value you need.
+- Press `Save`
+The application will restart.<br/>
+Once restarted, click on `Visit App URL`. The application screen will open
+<br/><br/><img src="images/ApplicationScreen.png" alt="ApplicationScreen" width="640" border="10" /><br/><br/>
+- Put some values at your criteria
+- Press `Send Data to Watson`
+You will see the results of the prediction.
+<br/><br/><img src="images/AppResults.png" alt="AppResults" width="640" border="10" /><br/><br/>
 
 
 ### Summary
-You have learned how to create a complete predictive model without programming: from importing the data, preparing the data, to training and saving the model. You also learned how to use SPSS Modeler and export the model to Watson Machine Learning, where you deployed the model as a web service. Then you created a notebook to test the model as a web service implementation.
+You have learned how to create a complete predictive model without programming: from importing the data, preparing the data, to training and saving the model. You also learned how to use SPSS Modeler and AutoAI and export the model from AutoAI to Watson Machine Learning, where you deployed the model as a web service. Then you created a notebook to test the model as a web service implementation and finally you have deployed a web application that consumes the web service and show the model results.
 
 
 ## Credits
