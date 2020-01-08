@@ -286,9 +286,10 @@ You should get the scoring results, with an array, where each element contains t
 <br/><br/><img src="images/NB_cell3.png" alt="NB_cell3" width="640" border="10" /><br/><br/>
 
 ### Step 6. Deploy Web Application
-
-Click `Deploy to IBM Cloud` button above to deploy the application to IBM Cloud. <br/>
+In this step, you will deploy a web application that will call the published AutoAI web service endpoint to get the loan granting decision.
 <br/>[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/jaumemir/watson_studio.git)
+<br/>
+Click `Deploy to IBM Cloud` button above to deploy the application to IBM Cloud. <br/>
 
 
 ### Summary
