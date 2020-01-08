@@ -10,8 +10,6 @@ stages:
   jobs:
   - name: Build
     type: builder
-    build_type: npm
-    working_dir: webapp
     artifact_dir: ''
 - name: Deploy Stage
   inputs:
