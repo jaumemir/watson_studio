@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+body{
+  font-family: Tahoma, Geneva, sans-serif;
+}
+.myButton {
+	background-color:#454cc7;
+	border-radius:28px;
+	border:1px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	position: relative;
+}
+.myButton:hover {
+	background-color:#2a5bbd;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+.image_ibmR{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+.image_ibmL{
+	position: absolute;
+	top: 0px;
+	left: 20px;
+}
+.button_div_payload{
+	background-color: black;
+	border-radius: 20px;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 25px;
+	font-size: 12px;
+}
+.button_div_result{
+	background-color: black;
+	border-radius: 20px;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 25px;
+	font-size: 12px;
+}
+.separation{
+	margin: 0px;
+	display: inline-block;
+	padding: 10px;
+	width: 600px;
+}
+.title{
+	border-bottom: 3px solid #0000b3;
+	font-style: bold;
+	font-size: 40px;
+	height: 60px;
+	text-align: center;
+}
+</style>
+<body>
+<div class="title">
+	Watson Machine Learning App
+	<img src="img\ibm.png" width="120" height="50" class="image_ibmR">
+	<img src="img\ibm-watson-full-logo.png" width="120" height="50" class="image_ibmL">
+</div>
+<div class="row">
+	<div class="column separation">
+		<p>This is the final part of the Watson Studio and<br> Watson Machine Learning demo. This web-app sends a payload of data in <br> form of JSON object to the WML service and it requests a prediction to the model that has just been deployed.</p>
+		<form method="post" action="/predict">
+		<div class="row">
+			<div class="column">
+			<b>Gender:</b>
+			<br>
+			<select name="Gender">
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
+			</select><br><br>	
+			<b>Marital Status:</b>
+			<br>
+			<select name="Married">
+				<option value="Yes">Yes</option>
+		    	<option value="No">No</option>
+			</select><br><br>
+			<b>Dependents:</b><br>
+			<input type="number" name="Dependents" value=0><br><br>
+			<b>Self Employed:</b> <br>
+			<select name="Self_Employed">
+				<option value="Yes">Yes</option>
+		    	<option value="No">No</option>
+			</select><br><br>
+			<b>Property Area:</b> <br>
+			<select name="Property_Area">
+				<option value="Urban">Urban</option>
+		    	<option value="Semiurban">Semiurban</option>
+		    	<option value="Rural">Rural</option>
+			</select><br><br>
+			<b>Education:</b> <br>
+			<select name="Education">
+				<option value="Graduate">Graduate</option>
+		    	<option value="Not Graduate">Not Graduate</option>
+			</select>
+			</div>
+			<div class="column">
+			<b>Insurance Policy Amount Term:</b> <br>
+			<input type="number" name="Loan_Amount_Term" value=360><br><br>
+			<b>Credit History:</b> <br>
+			<select name="Credit_History">
+				<option value=0>0</option>
+		    	<option value=1>1</option>
+			</select><br><br>
+			<b>Insurance Policy Amount:</b> <br>
+			<input type="number" name="Loan_Amount" value=12><br><br>
+			<b>Coapplicant Income:</b> <br>
+			<input type="number" name="CoapplicantIncome" value=0><br><br>
+			<b>Applicant Income:</b> <br>
+			<input type="number" name="ApplicantIncome" value=0>
+			</div>
+		</div>
+		<br><br>
+		<input type="submit" value="Send data to Watson" class="myButton">
+		</form>
+	</div>
+	<div class="column">
+		<p id="message_result"></p>
+		<div id="chartContainer" style="height: 225px; width: 80%;"></div>
+		<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+		Payload:
+		<div class="row button_div_payload">
+			<p id="payload"></p>
+		</div>
+		<br><br>
+		Response:
+		<div class="row button_div_result">
+			<p id="result"></p>
+		</div>
+	</div>
+</div>
+<script>
+var response_string = "<%= response_string %>";
+var payload = "<%= payload %>";
+var confidence_yes = Number("<%= confidence_yes %>");
+var confidence_no = Number("<%= confidence_no %>");
+var message_result = "Waiting for data to output a prediction"
+document.getElementById('message_result').innerHTML = message_result
+document.getElementById('result').innerHTML = response_string
+document.getElementById('payload').innerHTML = payload
+
+window.onload = function() {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+		text: ""
+	},
+	data: [{
+		type: "pie",
+		startAngle: 270,
+		yValueFormatString: "##0.00\"%\"",
+		indexLabel: "{label} {y}",
+		dataPoints: [
+			{y: confidence_yes, label: "Yes"},
+			{y: confidence_no, label: "No"}
+		]
+	}]
+});
+chart.render();
+}
+if (confidence_yes > confidence_no){
+	message_result = "This client is <b>eligible</b>."
+	document.getElementById('message_result').innerHTML = message_result
+} else {
+	message_result = "This client is <b>not eligible</b>."
+	document.getElementById('message_result').innerHTML = message_result
+}
+
+</script>
+</body>
+</html>
