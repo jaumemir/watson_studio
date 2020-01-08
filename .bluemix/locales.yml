@@ -1,0 +1,5 @@
+---
+root:
+  $ref: ./messages.yml
+es:
+  $ref: ./messages_es.yml
