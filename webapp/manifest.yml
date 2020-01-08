@@ -1,6 +1,5 @@
 applications:
 - name: ws-webapp-demo
-  path: ./webapp
   instances: 1
   memory: 256M
   buildpack: sdk-for-nodejs
