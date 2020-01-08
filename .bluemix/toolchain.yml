@@ -54,5 +54,4 @@ form:
       dev-organization: ''
       dev-space: ''
       app-name: '{{services.repo.parameters.repo_name}}'
-    schema:
-      $ref: deploy.json
+      
