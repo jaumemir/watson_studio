@@ -51,7 +51,8 @@ The format of the training data in `train_loan.csv` is:
 2. [Upload the dataset to Watson Studio](#step-2-upload-the-dataset-to-watson-studio)
 3. [Refine the train dataset, using Watson Studio Refinery capability](#step-3-refine-the-train-dataset-using-watson-studio-refinery-capability)
 4. [Build a visual flow model and deploy it as a web service with no coding](#step-4-build-a-visual-flow-model-and-deploy-it-as-a-web-service-with-no-coding)
-5. [Build an alternative model using AutoAI capabilities of Watson Studio & Watson Machine Learning](#step-5-build-an-alternative-model-using-autoai-capabilities-of-watson-studio-watson-machine-learning
+5. [Build an alternative model using AutoAI capabilities of Watson Studio & Watson Machine Learning](#step-5-build-an-alternative-model-using-autoai-capabilities-of-watson-studio-watson-machine-learning)
+6. [Deploy a client Web Application](#step-6-deploy-a-client-web-application)
 
 
 ### Step 1: Create a project in Watson Studio
@@ -285,7 +286,7 @@ Once done, you should have a notebook like the one in the figure.
 You should get the scoring results, with an array, where each element contains the predicted target and the confidence (or probability) for each of the two possible classes (0,1).
 <br/><br/><img src="images/NB_cell3.png" alt="NB_cell3" width="640" border="10" /><br/><br/>
 
-### Step 6. Deploy Web Application
+### Step 6. Deploy a client Web Application
 In this step, you will deploy a web application that will call the published AutoAI web service endpoint to get the loan granting decision.
 <br/>
 <br/>[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/jaumemir/watson_studio.git)
@@ -294,14 +295,17 @@ Click `Deploy to IBM Cloud` button above to deploy the application to IBM Cloud.
 <br/>
 The IBM Cloud DevOps will open and a new Toolchain will be created for you.
 <br/><br/><img src="images/Toolchain.png" alt="Toolchain" width="640" border="10" /><br/><br/>
-- Just click to `Delivery Pipeline` and then to `New` key to generate a new key.
-- Ensure that region, organization and space are filled up and then press `Create`
+- Just click to `Delivery Pipeline` and then to `New` key to generate a new key. Press `OK` in the emerging dialog.
+- Region, organization and space are populated automatically. If organization and space are not populated, change the region until you find all fields are populated. Check they are correct and then press `Create` on the top right
 <br/><br/><img src="images/Toolchain2.png" alt="Toolchain2" width="640" border="10" /><br/><br/>
-The toolchain and delivery pipeline will be created and launched its execution. Click on `Delivery Pipeline` to access and monitor how the toolchain builds the application and deploys it as an IBM Cloudfoundry node.js application.
+The toolchain and delivery pipeline will be created and launched its execution. 
 <br/><br/><img src="images/Toolchain3.png" alt="Toolchain3" width="640" border="10" /><br/><br/>
+Click on `Delivery Pipeline` to access and monitor how the toolchain builds the application and deploys it as an IBM Cloudfoundry node.js application.
+<br/><br/><img src="images/Toolchain4.png" alt="Toolchain4" width="640" border="10" /><br/><br/>
 When it completes, click on `View console` or if there is any problem, just go to `Resource List`, find the application `watson_studio-202001nnnnnnnnn` (being `nnn` digits) and open it.
 <br/><br/><img src="images/Application.png" alt="Application" width="640" border="10" /><br/><br/>
 - Click on the `Runtime` menu
+<br/><br/><img src="images/Application2.png" alt="Application2" width="640" border="10" /><br/><br/>
 - Click on `Environment Variables` and scroll down
 - Fill in the three environment variables. The needed values can be found in the notebook from **Step 5**
 - Find `APIKEY` in the `wml_credentials` dictionary, in cell 5
